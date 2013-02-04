@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" ng-app=""
+      ng-controller="MemoryControler">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  
+  <title>Memory</title>  
+ 
+  <link href="css/bootstrap.css" rel="stylesheet" />
+  <!-- <link href="css/bootstrap-responsive.css" rel="stylesheet" /> -->
+  <link rel="stylesheet" type="text/css" href="memory.css" />
+
+  <!-- <script src="js/jquery-1.8.3.js"></script> -->
+  <!-- <script src="js/bootstrap.js"></script> -->
+  <script src="js/angular.min.js">
+  </script>
+  <script src="memory.js"></script>
+
+</head>
+<body> 
+
+  <!--Navbar-->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">Memory</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li class="active"><a class="active">Create</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container MemoryBuilder">
+    <div class="row-fluid">
+      <div class="span5">
+	
+	<div>
+	  <p>Images : {{media.length}}</p>
+	  <button class="btn" ng-click="clear()">Clear</button>
+	</div>
+
+	<hr />
+
+	<form class="form-inline">
+	  <label>File(s):</label>
+	  <input type="file" accept="image/*" multiple="multiple" />
+	</form>
+
+	<hr />
+
+	<form class="form-inline" ng-submit="addUrl()">
+	  <label>URL: </label>
+	  <input class="url" type="url" ng-model="url" />
+	  <button class="btn" type="button"><i class="icon-plus-sign"></i>Add</button>
+	</form>
+	
+	<hr />
+
+	<!-- Video/webcam stuff -->
+	<div ng-show="userMediaEnabled">
+	  <p>
+	    Camera:
+	    <button class="btn" ng-click="toggleStream()">{{videoLabel()}}</button>
+	    <button class="btn" ng-click="takePicture()" ng-enabled="stream">Take</button>
+	  </p>
+	  <video autoplay="autoplay" />
+	  <canvas />
+	</div>
+	
+      </div>
+      <div class="filedrop span7"
+	   dropzone="f:image/*"
+	   >
+	<div ng-repeat="m in media" style="display: table-row;">
+	  <div style="display: table-cell;">
+	    <div class="memory-cell">
+	      <img src="{{m.url}}" />
+	    </div>
+	  </div>
+	  <div style="display: table-cell;">
+	    <p><a class="btn" href="{{m.url}}" download="" target="_blank">Save</a></p>
+	    <p><button class="btn" type="button" ng-click="removeMedia(m)"
+		       ><i class="icon-remove-sign"></i>Remove</button></p>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

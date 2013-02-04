@@ -1,0 +1,29 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.memory-cell {
+  width: 5cm;
+  height: 5cm;
+  border: black solid thin;
+  background-color: white;
+  padding: 0.1cm;  
+}
+
+.memory-cell > img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.filedrop {
+    background-color: grey;
+    height: 20cm;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+video {
+    max-width: 100%;
+}
