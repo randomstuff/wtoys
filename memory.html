@@ -38,21 +38,31 @@
       <div class="span5">
 	
 	<div>
+	  <h2>Create your set of tiles</h2>
 	  <p>Images : {{media.length}}</p>
-	  <button class="btn" ng-click="clear()">Clear</button>
+	  <button class="btn" ng-click="clear()">
+	    <i class=" icon-remove-sign"></i> Clear
+	  </button>
+	  <button class="btn" disabled="disabled">
+	    <i class="icon-thumbs-up"></i> Play!
+	  </button>
 	</div>
 
+	<hr/>
+
+	<p><b>Drop</b> or <b>paste</b>.</p>
+	
 	<hr />
 
 	<form class="form-inline">
-	  <label>File(s):</label>
-	  <input type="file" accept="image/*" multiple="multiple" />
+	  <label>Add file(s):</label>
+	  <input type="file" accept="image/*,text/uri-list" multiple="multiple" />
 	</form>
 
 	<hr />
 
 	<form class="form-inline" ng-submit="addUrl()">
-	  <label>URL: </label>
+	  <label>Add URL: </label>
 	  <input class="url" type="url" ng-model="url" />
 	  <button class="btn" type="button"><i class="icon-plus-sign"></i>Add</button>
 	</form>
@@ -62,7 +72,7 @@
 	<!-- Video/webcam stuff -->
 	<div ng-show="userMediaEnabled">
 	  <p>
-	    Camera:
+	    Use a camera:
 	    <button class="btn" ng-click="toggleStream()">{{videoLabel()}}</button>
 	    <button class="btn" ng-click="takePicture()" ng-enabled="stream">Take</button>
 	  </p>
