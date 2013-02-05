@@ -61,6 +61,22 @@ Helpers.parseUriList = function(list) {
   filter(function(x) { return x.length!=0 && !x[0]!="#"; })
 };
 
+Helpers.fitImage = function(img) {
+  var wc = img.parentElement.clientWidth;
+  var hc = img.parentElement.clientHeight; 
+  
+  var w = img.naturalWidth;
+  var h = img.naturalHeight;
+
+  if(h*wc/w > hc) {
+    img.height = hc;
+    img.width  = w*hc/h;
+  } else {
+    img.height = h*wc/w;
+    img.width  = wc;
+  }
+};
+
 // ***** Media
 
 var media = {};

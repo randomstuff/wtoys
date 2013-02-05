@@ -87,7 +87,7 @@
 	<div ng-repeat="m in media" style="display: table-row;">
 	  <div style="display: table-cell;">
 	    <div class="memory-cell">
-	      <img src="{{m.url}}" />
+	      <img src="{{m.url}}" onload="Helpers.fitImage(this);"/>
 	    </div>
 	  </div>
 	  <div style="display: table-cell;">
