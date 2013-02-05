@@ -261,7 +261,7 @@ function MemoryControler($scope, $location) {
    if(uri) {
      console.log("Adding uri");
      $scope.addUri(uri);
-   }   
+   }
  };
 
  // ***** Actions
@@ -326,6 +326,40 @@ function MemoryControler($scope, $location) {
      $scope.addUri(url);
    }
  };
+
+ // ***** Launch play
+  
+  $scope.sizes = [4,5,6,7,8];
+  
+  $scope.rows = 4;
+  $scope.columns = 4;
+
+  $scope.neededCells = function() {
+    return Math.round($scope.rows*$scope.columns/2);
+  };
+
+  $scope.playReady = function() {
+    return $scope.media.length >= $scope.neededCells();
+  };
+
+  $scope.playStyle = function() {
+    if($scope.playReady) {
+      return "info";
+    } else {
+      return "error;"
+    }
+  };
+
+  $scope.playing = false;
+
+  $scope.play = function() {
+    $scope.playing = true;   
+  };
+
+  // ***** Play model
+  
+  $scope.grid = [];  
+
 }
 
 // **** All of this should by angular-ified

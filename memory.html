@@ -18,51 +18,54 @@
 
 </head>
 <body> 
-
-  <!--Navbar-->
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="#">Memory</a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            <li class="active"><a class="active">Create</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
   
-  <div class="container MemoryBuilder">
+  <div class="container MemoryBuilder" ng-show="!playing">
+
     <div class="row-fluid">
       <div class="span5">
-	
-	<div>
-	  <h2>Create your set of tiles</h2>
-	  <p>Images : {{media.length}}</p>
-	  <button class="btn" ng-click="clear()">
-	    <i class=" icon-remove-sign"></i> Clear
-	  </button>
-	  <button class="btn" disabled="disabled">
-	    <i class="icon-thumbs-up"></i> Play!
-	  </button>
+
+	<div class="masthead">
+          <ul class="nav nav-pills pull-right">
+            <li><a href="index.html"><i class="icon-home"></i>Home</a></li>
+	    <li><a href="#" ng-click="clear()"><i class=" icon-remove-sign"></i> Clear</a></li>
+          </ul>
+          <h3 class="muted">Memory</h3>
 	</div>
 
-	<hr/>
+	<hr />
+	
+	<div>
+	  <form class="form-inline">
+
+	    <label>Size:</label>
+	    <input class="input-small" type="number" ng-model="rows" min="3" max="8" size="3"/>
+	    ×
+	    <input class="input-small" type="number" ng-model="columns" min="3" max="8" />
+	    <button class="btn btn-primary" ng-click="play()" ng-disabled="!playReady()">
+	      <i class="icon-thumbs-up"></i> Go!
+	    </button>
+	  </form>
+	  
+	  <p class="{{playStyle()}}">Images : {{media.length}} / {{neededCells()}}</p>
+
+	  
+	</div>	
+
+	<hr />
 
 	<p><b>Drop</b> or <b>paste</b>.</p>
 	
 	<hr />
 
 	<form class="form-inline">
-	  <label>Add file(s):</label>
+	  <label>File(s):</label>
 	  <input type="file" accept="image/*,text/uri-list" multiple="multiple" />
 	</form>
 
 	<hr />
 
 	<form class="form-inline" ng-submit="addUrl()">
-	  <label>Add URL: </label>
+	  <label>URLs: </label>
 	  <input class="url" type="url" ng-model="url" />
 	  <button class="btn" type="button"><i class="icon-plus-sign"></i>Add</button>
 	</form>
@@ -98,6 +101,22 @@
 	</div>
       </div>
     </div>
+  </div>
+
+  <!-- ***** ***** ***** ***** -->
+
+  <div class="container" ng-show="playing">
+    <table>
+      <tbody>
+	<tr ng-repeat="row in grid">
+	  <td ng-repeat="cell in row">
+	    <div class="memory-cell">
+	      <img src="{{cell.media.url}}" onload="Helpers.fitImage(this);"/>
+	    </div>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
   </div>
 
 </body>
