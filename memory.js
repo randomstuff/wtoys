@@ -77,6 +77,19 @@ Helpers.fitImage = function(img) {
   }
 };
 
+// conditions is string or regexp
+Helpers.getItem = function(items,condition) {
+  if(!items)
+    return null;
+  
+  for (var i = 0 ; i < items.length ; i++) {
+    var item = items[i];
+    if(condition.test ? condition.test(item.type) : condition==item.type) {
+      return item;
+    }
+  }  
+};
+
 // ***** Media
 
 var media = {};
@@ -209,49 +222,36 @@ function MemoryControler($scope, $location) {
      return;
    }
    
-   if(dataTransfer.items) {
-     var items = dataTransfer.items;
-     var n = items.length;
-     for (var i = 0 ; i < n ; i++) {
-       var item = items[i];
-       if(/^image\//.test(item.type)) {		  
-	 if(item.getAsFile) {
-	   console.log("Adding item image/*");
-	   var file = item.getAsFile();
-	   $scope.addFile(file);
-	   return;
-	 }
-       }
-     }
+   if(dataTransfer.items && dataTransfer.items.length>0) {
      
-     for (var i = 0 ; i < n ; i++) {
-       var item = items[i];
-       if(item.type=="text/html") {
-	 if(item.getAsFile) {
-	   console.log("Adding item text/html");
-	   item.getAsString(function(html) {
-	       $scope.$apply(function() {
-		   $scope.parseHtml(html);
-		 });
-	     });
-	   return;	   
-	 }
-       }
+     var imageItem = Helpers.getItem(dataTransfer.items, /^image\//);
+     if(imageItem && imageItem.getAsFile) {
+       console.log("Adding item image/*");
+       var file = imageItem.getAsFile();
+       $scope.addFile(file);
+       return;
      }
 
-     for (var i = 0 ; i < n ; i++) {
-       var item = items[i];
-       if(item.type=="text/uri-list") {
-	 if(item.getAsFile) {
-	   console.log("Adding item text/uri-list");
-	   item.getAsString(function(uriList) {
-	       $scope.$apply(function() {
-		   $scope.addUriList(uriList);
-		 });
+     var htmlItem = Helpers.getItem(dataTransfer.items, "text/html");
+     if(htmlItem && htmlItem.getAsFile) {
+       console.log("Adding item text/html");
+       htmlItem.getAsString(function(html) {
+	   $scope.$apply(function() {
+	       $scope.parseHtml(html);
 	     });
-	   return;	   
-	 }
-       }
+	 });
+       return;
+     }
+
+     var uriListItem = Helpers.getItem(dataTransfer.items,"text/uri-list");
+     if(uriListItem && uriListItem.getAsString) {
+       console.log("Adding item text/uri-list");
+       item.getAsString(function(uriList) {
+	   $scope.$apply(function() {
+	       $scope.addUriList(uriList);
+	     });
+	 });
+       return;	   
      }
      
    }
