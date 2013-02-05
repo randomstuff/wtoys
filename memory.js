@@ -344,7 +344,7 @@ window.addEventListener("load", function() {
 
 /* Drag & Drop */
 window.addEventListener("load", function() {
-    var elements = document.querySelectorAll(".filedrop");
+    var elements = document.querySelectorAll(".MemoryBuilder");
     for(var i=0; i!=elements.length; ++i) {
       var element = elements[i];
       Helpers.dropzone(element, function(dataTransfer) {
