@@ -99,6 +99,18 @@ Helpers.swap = function(xs,i,j) {
   xs[j] = temp;
 };
 
+Helpers.choose = function(xs,count) {
+  var copy = xs.slice(0);
+  var selection = [];
+  for(var i=0; i!=count; ++i) {
+    var index = Math.floor(Math.random() * copy.length);
+    selection.push(copy[index]);
+    Helpers.swap(copy, index, copy.length-1);
+    copy.pop();
+  }
+  return selection;
+};
+
 // ***** Media
 
 var media = {};
@@ -411,23 +423,10 @@ function MemoryControler($scope, $location) {
     
     // 1) Choose n elements
 
-    var selection = [];
-
-    for(var i=0; i!=$scope.media.length; ++i) {
-      selection.push($scope.media[i]);
+    var selection = Helpers.choose($scope.media, $scope.game.remaining);
+    for(var i=0; i!=$scope.game.remaining; ++i) {
+      selection.push(selection[i]);
     }
-
-
-      var preselection = selection;
-      selection = [];
-      for(var i=0; i!=$scope.game.remaining; ++i) {
-	var index = Math.floor(Math.random() * preselection.length);
-	selection.push(preselection[index]);
-	selection.push(preselection[index]);	
-	Helpers.swap(preselection, index, preselection.length-1);	
-	preselection.pop();
-      }
-
 
     // 2) Setup grid
     
