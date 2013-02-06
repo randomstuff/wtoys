@@ -378,16 +378,15 @@ window.addEventListener("load", function() {
 
 /* Drag & Drop */
 window.addEventListener("load", function() {
-    var elements = document.querySelectorAll(".MemoryBuilder");
-    for(var i=0; i!=elements.length; ++i) {
-      var element = elements[i];
+
+    var element = document.body;
       Helpers.dropzone(element, function(dataTransfer) {
 	  var $scope = angular.element(element).scope();
 	  $scope.$apply(function() {
 	      $scope.addDataTransfer(dataTransfer);
 	    });
 	});
-    }
+
   });
 
 /* Paste */

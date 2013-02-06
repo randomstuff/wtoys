@@ -17,7 +17,6 @@ body {
 }
 
 .filedrop {
-    background-color: grey;
     height: 20cm;
     overflow-y: auto;
     border-radius: 10px;
