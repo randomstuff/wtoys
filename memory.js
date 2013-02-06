@@ -22,6 +22,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
+"use strict";
+
 // ***** Polyfill/compatibility
 
 if(!window.console) {
@@ -175,14 +177,14 @@ function MemoryControler($scope, $location) {
    if(file.type=="text/uri-list" || (file.type=="" && /\.uris?$/.test(file.name))) {
      var reader = new FileReader();     
      reader.readAsText(file);
-     function handleText(event) {
+     var handleText = function(event) {
        $scope.$apply(function() {
 	   var uris = Helpers.parseUriList(event.target.result);
 	   uris.forEach(function(uri) {
 	       $scope.addUri(uri);
 	     });
 	 });
-     }
+     };
      reader.onload = handleText;
    } else {
      $scope.media.push(Media.fromFile(file));
@@ -350,9 +352,9 @@ function MemoryControler($scope, $location) {
    canvas.height = video.videoHeight;
    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
    if(canvas.toBlob) {
-     function handler(blob) {
+     var handler = function(blob) {
        $scope.media.push(Media.fromFile(blob));
-     }
+     };
      canvas.toBlob(handler,"image/png");
    } else {
      var url = canvas.toDataURL('image/png');
