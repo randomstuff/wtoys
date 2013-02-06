@@ -334,19 +334,19 @@ function MemoryControler($scope, $location) {
   $scope.rows = 4;
   $scope.columns = 4;
 
-  $scope.neededCells = function() {
-    return Math.round($scope.rows*$scope.columns/2);
+  $scope.neededTiles = function() {
+    return Math.floor($scope.rows*$scope.columns/2);
   };
 
   $scope.playReady = function() {
-    return $scope.media.length >= $scope.neededCells();
+    return $scope.media.length >= $scope.neededTiles();
   };
 
   $scope.playStyle = function() {
     if($scope.playReady) {
-      return "info";
+      return "text-success";
     } else {
-      return "error;"
+      return "text-error;"
     }
   };
 
