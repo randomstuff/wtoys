@@ -13,4 +13,6 @@ Memory:
 * make it work;
 * video/and or audio;
 * support for pairs of tiles;
-* Filesystem API (save image).
+* Filesystem API (save image);
+* add support for webActivity (pick image …);
+* use flexbox if available.
