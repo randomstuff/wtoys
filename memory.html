@@ -75,9 +75,9 @@
 	<!-- Video/webcam stuff -->
 	<div ng-show="userMediaEnabled">
 	  <p>
-	    Use a camera:
-	    <button class="btn" ng-click="toggleStream()">{{videoLabel()}}</button>
-	    <button class="btn" ng-click="takePicture()" ng-enabled="stream">Take</button>
+	    Camera:
+	    <button class="btn" ng-click="toggleStream()"><i class="{{videoIcon()}}"></i>{{videoLabel()}}</button>
+	    <button class="btn" ng-click="takePicture()" ng-disabled="!stream"><i class="icon-camera"></i>Take</button>
 	  </p>
 	  <video autoplay="autoplay" />
 	  <canvas />

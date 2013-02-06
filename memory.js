@@ -280,6 +280,22 @@ function MemoryControler($scope, $location) {
 
  $scope.stream = null;
 
+ $scope.canShoot = function() {
+   if($scope.stream) {
+     return true;
+   } else {
+     return false;
+   }
+ };
+
+ $scope.videoIcon = function() {
+   if($scope.stream) {
+     return "icon-stop";
+   } else {
+     return "icon-play";
+   }
+ };
+
  $scope.videoLabel = function() {
    if($scope.stream) {
      return "Stop";
@@ -300,8 +316,10 @@ function MemoryControler($scope, $location) {
    console.log("video on");
    navigator.getUserMedia({"video": true, "audio": false},
 			  function(stream) {
-			    $scope.stream = stream;
-			    video.src = (window.URL || window.webkitURL).createObjectURL(stream);
+			    $scope.$apply(function() {
+				$scope.stream = stream;
+				video.src = (window.URL || window.webkitURL).createObjectURL(stream);
+			      });
 			  },
 			  function(e) {
 			    // TODO, handle error
