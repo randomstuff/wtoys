@@ -392,10 +392,15 @@ window.addEventListener("load", function() {
 
 /* Paste */
 window.addEventListener("load", function() {
-    document.querySelector(".filedrop").
-      addEventListener("paste", function(e) {
+    document.querySelector(".MemoryBuilder").
+      addEventListener("paste", function(e) {	  	  
+	  if(e.target.tagName=="INPUT" || e.target.tagName=="TEXTAREA")
+	    return;
+
 	  if(!e.clipboardData)
 	    return;
+
+	  e.preventDefault();
 
 	  var filedrop = document.querySelector(".filedrop");
 	  var $scope = angular.element(filedrop).scope();
