@@ -417,7 +417,7 @@ function MemoryControler($scope, $location) {
       selection.push($scope.media[i]);
     }
 
-    if($scope.game.remaining<$scope.media.length) {
+
       var preselection = selection;
       selection = [];
       for(var i=0; i!=$scope.game.remaining; ++i) {
@@ -427,7 +427,7 @@ function MemoryControler($scope, $location) {
 	Helpers.swap(preselection, index, preselection.length-1);	
 	preselection.pop();
       }
-    }
+
 
     // 2) Setup grid
     
