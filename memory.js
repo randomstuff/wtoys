@@ -34,7 +34,7 @@ if(!window.console) {
 if(!navigator.getUserMedia) {
   navigator.getUserMedia = 
     navigator.webkitGetUserMedia ||
-    navigator.mozgetUserMedia ||
+    navigator.mozGetUserMedia ||
     navigator.msGetUserMedia;
  }
 
