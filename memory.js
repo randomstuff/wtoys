@@ -90,6 +90,12 @@ Helpers.getItem = function(items,condition) {
   }  
 };
 
+Helpers.swap = function(xs,i,j) {
+  var temp = xs[i];
+  xs[i] = xs[j];
+  xs[j] = temp;
+};
+
 // ***** Media
 
 var media = {};
@@ -110,7 +116,16 @@ Media.fromUri = function(uri) {
   var media = new Media;
   media.url = uri;
   return media;
+};
+
+// *****
+
+function Cell(media) {
+  this.media = media;
+  this.found = 0;
 }
+Cell.prototype = {};
+
 
 // *****
 
@@ -368,15 +383,60 @@ function MemoryControler($scope, $location) {
     }
   };
 
-  $scope.playing = false;
-
-  $scope.play = function() {
-    $scope.playing = true;   
-  };
-
   // ***** Play model
   
-  $scope.grid = [];  
+  $scope.playing = false;
+  
+  // How many cells still to find?
+  $scope.remaining = 0;
+
+  // 
+  $scope.selectedCell = null;
+
+  $scope.grid = [];
+
+  $scope.play = function() {
+    $scope.selectedCell = null;
+    $scope.remaining = $scope.neededTiles();
+    
+    // 1) Choose n elements
+
+    var selection = [];
+
+    for(var i=0; i!=$scope.media.length; ++i) {
+      selection.push($scope.media[i]);
+    }
+
+    if($scope.remaining<$scope.media.length) {
+      var preselection = selection;
+      selection = [];
+      for(var i=0; i!=$scope.remaining; ++i) {
+	var index = Math.floor(Math.random() * preselection.length);
+	selection.push(preselection[index]);
+	selection.push(preselection[index]);	
+	Helpers.swap(preselection, index, preselection.length-1);	
+	preselection.pop();
+      }
+    }
+
+    // 2) Setup grid
+    
+    $scope.grid = [];
+    for(var i=0; i!=$scope.rows; ++i) {
+      var row = [];
+      for(var j=0; j!=$scope.columns; ++j) {
+	if(selection.length>0) {
+	  var index = Math.floor(Math.random() * selection.length);
+	  row.push(new Cell(selection[index]));
+	  Helpers.swap(selection, index, selection.length-1);	
+	  selection.pop();
+	}
+      }
+      $scope.grid.push(row);
+    }
+
+    $scope.playing = true;
+  };
 
 }
 
