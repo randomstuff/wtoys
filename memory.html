@@ -41,7 +41,7 @@
 	    <input class="input-small" type="number" ng-model="rows" min="3" max="8" size="3"/>
 	    ×
 	    <input class="input-small" type="number" ng-model="columns" min="3" max="8" />
-	    <button class="btn btn-primary" ng-click="play()" ng-disabled="!playReady()">
+	    <button class="btn btn-primary" ng-click="game.play()" ng-disabled="!playReady()">
 	      <i class="icon-thumbs-up"></i> Go!
 	    </button>
 	  </form>
@@ -108,10 +108,12 @@
   <div class="container" ng-show="playing">
     <table>
       <tbody>
-	<tr ng-repeat="row in grid">
-	  <td ng-repeat="cell in row">
+	<tr ng-repeat="row in game.grid">
+	  <td ng-repeat="cell in row" ng-click="game.click(cell)"
+	      class="selected-{{cell==game.selectedCell || cell==game.otherSelectedCell}}">
 	    <div class="memory-cell">
-	      <img src="{{cell.media.url}}" onload="Helpers.fitImage(this);"/>
+	      <img src="{{cell.media.url}}" onload="Helpers.fitImage(this);"
+		   ng-show="cell.found || cell==game.selectedCell || cell==game.otherSelectedCell"/>
 	    </div>
 	  </td>
 	</tr>

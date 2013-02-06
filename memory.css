@@ -26,3 +26,6 @@ video {
     max-width: 100%;
 }
 
+.selected-true {
+    background-color: grey;
+}

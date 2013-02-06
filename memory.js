@@ -125,7 +125,7 @@ Media.fromUri = function(uri) {
 
 function Cell(media) {
   this.media = media;
-  this.found = 0;
+  this.found = false;
 }
 Cell.prototype = {};
 
@@ -374,6 +374,10 @@ function MemoryControler($scope, $location) {
   $scope.columns = 4;
 
   $scope.neededTiles = function() {
+    return Math.ceil($scope.rows*$scope.columns/2);
+  };
+
+  $scope.foundTiles = function() {
     return Math.floor($scope.rows*$scope.columns/2);
   };
 
@@ -392,18 +396,18 @@ function MemoryControler($scope, $location) {
   // ***** Play model
   
   $scope.playing = false;
+
+  $scope.game = {
+    remaining: 0,
+    selectedCell: null,
+    otherSelectedCell: null,
+    grid: []
+  };
   
-  // How many cells still to find?
-  $scope.remaining = 0;
-
-  // 
-  $scope.selectedCell = null;
-
-  $scope.grid = [];
-
-  $scope.play = function() {
-    $scope.selectedCell = null;
-    $scope.remaining = $scope.neededTiles();
+  $scope.game.play = function() {
+    $scope.game.selectedCell = null;
+    $scope.game.otherSelectedCell = null;
+    $scope.game.remaining = $scope.neededTiles();
     
     // 1) Choose n elements
 
@@ -413,10 +417,10 @@ function MemoryControler($scope, $location) {
       selection.push($scope.media[i]);
     }
 
-    if($scope.remaining<$scope.media.length) {
+    if($scope.game.remaining<$scope.media.length) {
       var preselection = selection;
       selection = [];
-      for(var i=0; i!=$scope.remaining; ++i) {
+      for(var i=0; i!=$scope.game.remaining; ++i) {
 	var index = Math.floor(Math.random() * preselection.length);
 	selection.push(preselection[index]);
 	selection.push(preselection[index]);	
@@ -427,7 +431,7 @@ function MemoryControler($scope, $location) {
 
     // 2) Setup grid
     
-    $scope.grid = [];
+    $scope.game.grid = [];
     for(var i=0; i!=$scope.rows; ++i) {
       var row = [];
       for(var j=0; j!=$scope.columns; ++j) {
@@ -438,11 +442,44 @@ function MemoryControler($scope, $location) {
 	  selection.pop();
 	}
       }
-      $scope.grid.push(row);
+      $scope.game.grid.push(row);
     }
 
     $scope.playing = true;
   };
+
+ $scope.game.click = function(cell) {  
+
+   if(cell.found) {
+     console.log("Already found, do nothing");
+     return;
+   }
+
+   if($scope.game.selectedCell==null || $scope.game.otherSelectedCell!=null) {
+     console.log("First selection");
+     $scope.game.selectedCell = cell;
+     $scope.game.otherSelectedCell = null;
+     return;
+   }
+
+   else if($scope.game.selectedCell==cell) {
+     console.log("Already selected, do nothing");
+     return;
+   }
+
+   else if($scope.game.selectedCell.media==cell.media) {
+     console.log("Found");
+     $scope.game.selectedCell.found = true;
+     cell.found = true;
+     $scope.game.selectedCell = null;
+     $scope.game.otherSelectedCell = null;
+   }
+
+   else {
+     console.log("Not found");
+     $scope.game.otherSelectedCell = cell;
+   }
+ };
 
 }
 
