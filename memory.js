@@ -86,7 +86,8 @@ Helpers.getItem = function(items,condition) {
   
   for (var i = 0 ; i < items.length ; i++) {
     var item = items[i];
-    if(condition.test ? condition.test(item.type) : condition==item.type) {
+    if(condition.test ? condition.test(item.type)
+       : condition==item.type) {
       return item;
     }
   }  
@@ -174,7 +175,8 @@ function MemoryControler($scope, $location) {
  };
 
  $scope.addFile = function(file) { 
-   if(file.type=="text/uri-list" || (file.type=="" && /\.uris?$/.test(file.name))) {
+   if(file.type=="text/uri-list" ||
+      (file.type=="" && /\.uris?$/.test(file.name))) {
      var reader = new FileReader();     
      reader.readAsText(file);
      var handleText = function(event) {
@@ -331,18 +333,20 @@ function MemoryControler($scope, $location) {
    var video = document.querySelector("video");
 
    console.log("video on");
+
+   var callback = function(stream) {
+     $scope.$apply(function() {
+	 $scope.stream = stream;
+	 video.src = (window.URL || window.webkitURL).createObjectURL(stream);
+       });
+   };
+
+   var errback = function(e) {
+     alert(e);
+   }
+
    navigator.getUserMedia({"video": true, "audio": false},
-			  function(stream) {
-			    $scope.$apply(function() {
-				$scope.stream = stream;
-				video.src = (window.URL || window.webkitURL).createObjectURL(stream);
-			      });
-			  },
-			  function(e) {
-			    // TODO, handle error
-			    alert(e);
-			  }
-			  );
+			  callback, errback);
  };
  
  $scope.takePicture = function() {
