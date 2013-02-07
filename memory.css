@@ -19,6 +19,7 @@ MemoryBuilder > div > div {
 
 .memory-cell.selected-true {
     border-color :red;
+    opacity: 0.5;
 }
 
 .memory-cell > img {
