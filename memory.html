@@ -106,6 +106,8 @@
   <!-- ***** ***** ***** ***** -->
 
   <div class="container" ng-show="playing">
+    <button type="button" class="btn btn-link" ng-click="stopPlay()"><i class="icon-step-backward"></i></button>
+    <button type="button" class="btn btn-link" ng-click="game.play()"><i class="icon-repeat"></i></button>
     <table>
       <tbody>
 	<tr ng-repeat="row in game.grid">

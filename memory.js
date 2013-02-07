@@ -416,6 +416,11 @@ function MemoryControler($scope, $location) {
     grid: []
   };
   
+  $scope.stopPlay = function() {
+    $scope.game.grid = [];
+    $scope.playing = false;
+  };
+
   $scope.game.play = function() {
     $scope.game.selectedCell = null;
     $scope.game.otherSelectedCell = null;
