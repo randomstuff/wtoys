@@ -3,11 +3,22 @@ body {
     padding-bottom: 30px;
 }
 
+/* ***** MemoryBuilder ***** */
+
+MemoryBuilder > div > div {
+    overflo-y: auto;
+}
+
+/* ***** Memory-cell ***** */
+
 .memory-cell {
   width: 5cm;
   height: 5cm;
   border: black solid thin;
-  background-color: white;
+}
+
+.memory-cell.selected-true {
+    border-color :red;
 }
 
 .memory-cell > img {
@@ -15,6 +26,8 @@ body {
     max-width: 100%;
     /* object-fit: contain; */
 }
+
+/* ***** ***** */
 
 .filedrop {
     height: 20cm;
@@ -24,8 +37,4 @@ body {
 
 video {
     max-width: 100%;
-}
-
-.selected-true {
-    background-color: grey;
 }

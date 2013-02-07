@@ -109,9 +109,9 @@
     <table>
       <tbody>
 	<tr ng-repeat="row in game.grid">
-	  <td ng-repeat="cell in row" ng-click="game.click(cell)"
-	      class="selected-{{cell==game.selectedCell || cell==game.otherSelectedCell}}">
-	    <div class="memory-cell">
+	  <td ng-repeat="cell in row" ng-click="game.click(cell)">
+	    <div class="memory-cell
+			selected-{{cell==game.selectedCell || cell==game.otherSelectedCell}}">
 	      <img src="{{cell.media.url}}" onload="Helpers.fitImage(this);"
 		   ng-show="cell.found || cell==game.selectedCell || cell==game.otherSelectedCell"/>
 	    </div>
