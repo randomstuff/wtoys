@@ -398,10 +398,10 @@ function MemoryControler($scope, $location) {
   };
 
   $scope.playStyle = function() {
-    if($scope.playReady) {
+    if($scope.playReady()) {
       return "text-success";
     } else {
-      return "text-error;"
+      return "text-error";
     }
   };
 
