@@ -29,7 +29,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 if(!window.console) {
   (function() {
     var noop = function() {}
-    window.console = noop;
+    window.console = {};
+    window.console.log = noop;
   })();
  }
 
