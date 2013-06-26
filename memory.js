@@ -356,7 +356,7 @@ function MemoryControler($scope, $location) {
 
    var errback = function(e) {
      alert(e);
-   }
+   };
 
    navigator.getUserMedia({"video": true, "audio": false},
 			  callback, errback);
