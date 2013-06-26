@@ -40,42 +40,38 @@
 	  </form>
 	  
 	  <p class="{{playStyle()}}">Images: {{media.length}} / {{neededTiles()}}</p>
-
-	  
 	</div>	
 
 	<hr />
 
-	<p><b>Drop</b> or <b>paste</b>.</p>
-	
-	<hr />
-
-	<form class="form-inline">
-	  <label>File(s):</label>
-	  <input type="file" accept="image/*,text/uri-list" multiple="multiple" />
-	</form>
-
-	<hr />
-
-	<form class="form-inline" ng-submit="addUrl()">
-	  <label>URLs: </label>
-	  <input class="url" type="url" ng-model="url" />
-	  <button class="btn" type="button"><i class="icon-plus-sign"></i>Add</button>
-	</form>
-	
-	<hr />
-
-	<!-- Video/webcam stuff -->
-	<div ng-show="userMediaEnabled">
-	  <p>
-	    Camera:
-	    <button class="btn" ng-click="toggleStream()"><i class="{{videoIcon()}}"></i>{{videoLabel()}}</button>
-	    <button class="btn" ng-click="takePicture()" ng-disabled="!stream"><i class="icon-camera"></i>Take</button>
-	  </p>
-	  <video autoplay="autoplay" />
-	  <canvas />
-	</div>
-	
+        <p>Add images :</p>
+        <ol>
+          <li><p><b>Drop</b> or <b>paste</b> images, links …</p></li>
+          <li>
+	    <form class="form-inline">
+	      <label>Add file(s):</label>
+	      <input type="file" accept="image/*,text/uri-list" multiple="multiple" />
+	    </form>
+          </li>
+          <li>
+	    <form class="form-inline" ng-submit="addUrl()">
+	      <label>URLs: </label>
+	      <input class="url" type="url" ng-model="url" />
+	      <button class="btn" type="button" alt="Add"><i class="icon-plus-sign"></i>Add</button>
+	    </form>
+          </li>
+          <li>
+	    <div ng-show="userMediaEnabled">
+	      <p>
+	        Builtin camera:
+	        <button class="btn" ng-click="toggleStream()"><i class="{{videoIcon()}}"></i>{{videoLabel()}}</button>
+	        <button class="btn" ng-click="takePicture()" ng-disabled="!stream"><i class="icon-camera"></i>Take</button>
+	      </p>
+	      <video autoplay="autoplay" />
+	      <canvas />
+	    </div>
+	  </li>
+        </ol>
       </div>
       <div class="filedrop span7"
 	   dropzone="f:image/*"
