@@ -1,0 +1,11 @@
+{
+    "name": "wtoys",
+    "description": "Toys and games",
+    "version": "0.0",
+    "manifest_version": 2,
+    "app": {
+	"launch": {
+	    "local_path": "index.html"
+	}
+    }
+}
