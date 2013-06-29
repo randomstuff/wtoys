@@ -28,7 +28,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 if(!window.console) {
   (function() {
-    var noop = function() {}
+    var noop = function() {};
     window.console = {};
     window.console.log = noop;
   })();
@@ -49,11 +49,11 @@ Helpers.dropzone = function(element, callback) {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'copy';
     return false;
-  }
+  };
   element.ondrop = function(e) {
     e.preventDefault();
     callback(e.dataTransfer);
-  }
+  };
 };
 
 Helpers.parseUriList = function(list) {
@@ -61,7 +61,7 @@ Helpers.parseUriList = function(list) {
   
   return lines.
   map(function(x){ return x.trim(); }).
-  filter(function(x) { return x.length!=0 && !x[0]!="#"; })
+  filter(function(x) { return x.length!=0 && !x[0]!="#"; });
 };
 
 Helpers.fitImage = function(img) {
@@ -92,7 +92,7 @@ Helpers.getItem = function(items,condition) {
       return item;
     }
   }  
-};
+}
 
 Helpers.swap = function(xs,i,j) {
   var temp = xs[i];
