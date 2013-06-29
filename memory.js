@@ -535,5 +535,10 @@ window.addEventListener("load", function() {
 	    });
 
 	});
+    document.body.addEventListener("load", function(event) {console.log(event.target);
+      if(event.target.getAttribute("data-autofit")!=null) {console.log(2);
+           Helpers.fitImage(event.target);
+         }
+        }, true);
   });
 
