@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" ng-app="" ng-csp=""
-      ng-controller="MemoryControler">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />  
@@ -10,19 +9,21 @@
   <script src="js/angular.js"></script>
   <script src="memory.js"></script>
 </head>
-<body> 
+<body
+   ng-app="memoryApp" ng-csp="" ng-controller="MemoryController"
+   >
   
-  <div class="container MemoryBuilder" ng-show="!playing">
+  <div class="container MemoryBuilder" ng-if="!playing">
 
-    <div class="row-fluid">
-      <div class="span5">
+    <div class="row">
+      <div class="col-md-5">
 
 	<div class="masthead">
           <ul class="nav nav-pills pull-right">
-            <li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
-	    <li><a href="#" title="Clear" ng-click="clear()"><i class=" icon-remove-sign"></i></a></li>
+            <li><a href="index.html" title="Home"><i class="glyphicon glyphicon-home"></i></a></li>
+	    <li><a href="#" title="Clear" ng-click="clear()"><i class="glyphicon glyphicon-remove-sign"></i></a></li>
           </ul>
-          <h3 class="muted">Memory</h3>
+          <h3 class="text-muted">Memory</h3>
 	</div>
 
 	<hr />
@@ -31,11 +32,11 @@
 	  <form class="form-inline">
 
 	    <label>Size:</label>
-	    <input class="input-small" type="number" ng-model="rows" min="3" max="8" size="3"/>
+	    <input class="form-control" type="number" ng-model="rows" min="3" max="8" size="3"/>
 	    ×
-	    <input class="input-small" type="number" ng-model="columns" min="3" max="8" />
+	    <input class="form-control" type="number" ng-model="columns" min="3" max="8" size="3"/>
 	    <button class="btn btn-primary" ng-click="game.play()" ng-disabled="!playReady()">
-	      <i class="icon-thumbs-up"></i> Go!
+	      <i class="glyphicon glyphicon-thumbs-up"></i> Go!
 	    </button>
 	  </form>
 	  
@@ -57,15 +58,16 @@
 	    <form class="form-inline" ng-submit="addUrl()">
 	      <label>URLs: </label>
 	      <input class="url" type="url" ng-model="url" />
-	      <button class="btn" type="button" alt="Add"><i class="icon-plus-sign"></i>Add</button>
+	      <button class="btn btn-default" type="submit" alt="Add"><i class="glyphicon glyphicon-plus-sign"></i>Add</button>
 	    </form>
           </li>
           <li>
-	    <div ng-show="userMediaEnabled">
+	    <div ng-if="userMediaEnabled">
 	      <p>
 	        Builtin camera:
-	        <button class="btn" ng-click="toggleStream()"><i class="{{videoIcon()}}"></i>{{videoLabel()}}</button>
-	        <button class="btn" ng-click="takePicture()" ng-disabled="!stream"><i class="icon-camera"></i>Take</button>
+	        <button class="btn btn-default" ng-click="startStream()" ng-if="!stream"><i class="glyphicon glyphicon-play"></i>Start</button>
+	        <button class="btn btn-default" ng-click="stopStream()" ng-if="stream"><i class="glyphicon glyphicon-stop"></i>Stop</button>
+	        <button class="btn btn-default" ng-click="takePicture()" ng-disabled="!stream"><i class="glyphicon glyphicon-camera"></i>Take</button>
 	      </p>
 	      <video autoplay="autoplay" />
 	      <canvas />
@@ -73,7 +75,7 @@
 	  </li>
         </ol>
       </div>
-      <div class="filedrop span7"
+      <div class="filedrop col-md-7"
 	   dropzone="f:image/*"
 	   >
 	<div ng-repeat="m in media" style="display: table-row;">
@@ -83,9 +85,9 @@
 	    </div>
 	  </div>
 	  <div style="display: table-cell;">
-	    <p><a class="btn" href="{{m.url}}" download="" target="_blank">Save</a></p>
-	    <p><button class="btn" type="button" ng-click="removeMedia(m)"
-		       ><i class="icon-remove-sign"></i>Remove</button></p>
+	    <p><a class="btn btn-default" href="{{m.url}}" download="" target="_blank">Save</a></p>
+	    <p><button class="btn btn-default" type="button" ng-click="removeMedia(m)"
+		       ><i class="glyphicon glyphicon-remove-sign"></i>Remove</button></p>
 	  </div>
 	</div>
       </div>
@@ -94,9 +96,9 @@
 
   <!-- ***** ***** ***** ***** -->
 
-  <div class="container" ng-show="playing">
-    <button type="button" class="btn btn-link" ng-click="stopPlay()"><i class="icon-step-backward"></i></button>
-    <button type="button" class="btn btn-link" ng-click="game.play()"><i class="icon-repeat"></i></button>
+  <div class="container" ng-if="playing">
+    <button type="button" class="btn btn-link" ng-click="stopPlay()"><i class="glyphicon glyphicon-step-backward"></i></button>
+    <button type="button" class="btn btn-link" ng-click="game.play()"><i class="glyphicon glyphicon-repeat"></i></button>
     <table>
       <tbody>
 	<tr ng-repeat="row in game.grid">
@@ -104,7 +106,7 @@
 	    <div class="memory-cell
 			selected-{{cell==game.selectedCell || cell==game.otherSelectedCell}}">
 	      <img src="{{cell.media.url}}" data-autofit=""
-		   ng-show="cell.found || cell==game.selectedCell || cell==game.otherSelectedCell"/>
+		   ng-if="cell.found || cell==game.selectedCell || cell==game.otherSelectedCell"/>
 	    </div>
 	  </td>
 	</tr>

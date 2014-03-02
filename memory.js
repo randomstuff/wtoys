@@ -145,7 +145,13 @@ Cell.prototype = {};
 
 // *****
 
-function MemoryControler($scope, $location) {
+var memoryApp = angular.module('memoryApp', []).
+  config(['$compileProvider', function($compileProvider){
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|data|blob):/);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|data|blob):/);
+  }]);
+
+memoryApp.controller('MemoryController', function($scope, $location, $compile) {
 
   // ***** Feature detection
 
@@ -301,7 +307,7 @@ function MemoryControler($scope, $location) {
  $scope.url = "";
 
  // TODO, change this name (too close to addUri)
- $scope.addUrl = function() {
+ $scope.addUrl = function() {alert("Broken :/");
    if($scope.url && $scope.url!="") {
      $scope.media.push(Media.fromUri($scope.url));
    }
@@ -312,37 +318,7 @@ function MemoryControler($scope, $location) {
 
  $scope.stream = null;
 
- $scope.canShoot = function() {
-   if($scope.stream) {
-     return true;
-   } else {
-     return false;
-   }
- };
-
- $scope.videoIcon = function() {
-   if($scope.stream) {
-     return "icon-stop";
-   } else {
-     return "icon-play";
-   }
- };
-
- $scope.videoLabel = function() {
-   if($scope.stream) {
-     return "Stop";
-   } else {
-     return "Start";
-   }
- };
-
- $scope.toggleStream = function() {
-   if($scope.stream) {
-     $scope.stream.stop();
-     $scope.stream = null;
-     console.log("video off");
-     return;
-   }
+ $scope.startStream = function() {
    var video = document.querySelector("video");
 
    console.log("video on");
@@ -361,6 +337,12 @@ function MemoryControler($scope, $location) {
    navigator.getUserMedia({"video": true, "audio": false},
 			  callback, errback);
  };
+
+ $scope.stopStream = function() {
+   $scope.stream.stop();
+   $scope.stream = null;
+   console.log("video off");
+ };
  
  $scope.takePicture = function() {
    var canvas = document.querySelector("canvas");
@@ -370,7 +352,9 @@ function MemoryControler($scope, $location) {
    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
    if(canvas.toBlob) {
      var handler = function(blob) {
-       $scope.media.push(Media.fromFile(blob));
+       $scope.$apply(function() {
+         $scope.media.push(Media.fromFile(blob));
+       });
      };
      canvas.toBlob(handler,"image/png");
    } else {
@@ -486,7 +470,7 @@ function MemoryControler($scope, $location) {
    }
  };
 
-}
+});
 
 // **** All of this should by angular-ified
 

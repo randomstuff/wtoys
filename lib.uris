@@ -1,6 +1,8 @@
-https://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.js js/angular.js
-https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.js  js/bootstrap.js
-https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.css  css/bootstrap.css
-https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.css  css/bootstrap-responsive.css
-https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/img/glyphicons-halflings-white.png  img/glyphicons-halflings-white.png
-https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/img/glyphicons-halflings.png  img/glyphicons-halflings.png
+https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js js/angular.js
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js  js/bootstrap.js
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css  css/bootstrap.css
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap-theme.css  css/bootstrap-theme.css
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/fonts/glyphicons-halflings-regular.eot  fonts/glyphicons-halflings-regular.eot
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/fonts/glyphicons-halflings-regular.svg  fonts/glyphicons-halflings-regular.svg
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/fonts/glyphicons-halflings-regular.ttf  fonts/glyphicons-halflings-regular.ttf
+https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/fonts/glyphicons-halflings-regular.woff  fonts/glyphicons-halflings-regular.woff
