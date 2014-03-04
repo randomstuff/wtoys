@@ -382,14 +382,6 @@ memoryApp.controller('MemoryController', function($scope, $location, $compile) {
     return $scope.media.length >= $scope.neededTiles();
   };
 
-  $scope.playStyle = function() {
-    if($scope.playReady()) {
-      return "text-success";
-    } else {
-      return "text-error";
-    }
-  };
-
   // ***** Play model
   
   $scope.playing = false;

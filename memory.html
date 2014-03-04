@@ -40,7 +40,7 @@
 	    </button>
 	  </form>
 	  
-	  <p class="{{playStyle()}}">Images: {{media.length}} / {{neededTiles()}}</p>
+	  <p class="{{playReady() ? 'text-success' : 'text-error'}}">Images: {{media.length}} / {{neededTiles()}}</p>
 	</div>	
 
 	<hr />
