@@ -365,8 +365,6 @@ memoryApp.controller('MemoryController', function($scope, $location) {
 
  // ***** Launch play
   
-  $scope.sizes = [4,5,6,7,8];
-  
   $scope.config = {
     rows:4,
     columns:4
