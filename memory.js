@@ -151,7 +151,7 @@ var memoryApp = angular.module('memoryApp', []).
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|data|blob):/);
   }]);
 
-memoryApp.controller('MemoryController', function($scope, $location, $compile) {
+memoryApp.controller('MemoryController', function($scope, $location) {
 
   // ***** Feature detection
 
