@@ -367,19 +367,17 @@ memoryApp.controller('MemoryController', function($scope, $location) {
   
   $scope.sizes = [4,5,6,7,8];
   
-  $scope.rows = 4;
-  $scope.columns = 4;
-
-  $scope.neededTiles = function() {
-    return Math.ceil($scope.rows*$scope.columns/2);
+  $scope.config = {
+    rows:4,
+    columns:4
   };
 
-  $scope.foundTiles = function() {
-    return Math.floor($scope.rows*$scope.columns/2);
+  $scope.config.neededTiles = function() {
+    return Math.ceil($scope.config.rows*$scope.config.columns/2);
   };
 
   $scope.playReady = function() {
-    return $scope.media.length >= $scope.neededTiles();
+    return $scope.media.length >= $scope.config.neededTiles();
   };
 
   // ***** Play model
@@ -401,7 +399,7 @@ memoryApp.controller('MemoryController', function($scope, $location) {
   $scope.game.play = function() {
     $scope.game.selectedCell = null;
     $scope.game.otherSelectedCell = null;
-    $scope.game.remaining = $scope.neededTiles();
+    $scope.game.remaining = $scope.conig.neededTiles();
     
     // 1) Choose n elements
 
@@ -413,9 +411,9 @@ memoryApp.controller('MemoryController', function($scope, $location) {
     // 2) Setup grid
     
     $scope.game.grid = [];
-    for(var i=0; i!=$scope.rows; ++i) {
+    for(var i=0; i!=$scope.config.rows; ++i) {
       var row = [];
-      for(var j=0; j!=$scope.columns; ++j) {
+      for(var j=0; j!=$scope.config.columns; ++j) {
 	if(selection.length>0) {
 	  var index = Math.floor(Math.random() * selection.length);
 	  row.push(new Cell(selection[index]));

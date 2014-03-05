@@ -32,15 +32,15 @@
 	  <form class="form-inline">
 
 	    <label>Size:</label>
-	    <input class="form-control" type="number" ng-model="rows" min="3" max="8" size="3"/>
+	    <input class="form-control" type="number" ng-model="config.rows" min="3" max="8" size="3"/>
 	    ×
-	    <input class="form-control" type="number" ng-model="columns" min="3" max="8" size="3"/>
+	    <input class="form-control" type="number" ng-model="config.columns" min="3" max="8" size="3"/>
 	    <button class="btn btn-primary" ng-click="game.play()" ng-disabled="!playReady()">
 	      <i class="glyphicon glyphicon-thumbs-up"></i> Go!
 	    </button>
 	  </form>
 	  
-	  <p class="{{playReady() ? 'text-success' : 'text-error'}}">Images: {{media.length}} / {{neededTiles()}}</p>
+	  <p class="{{playReady() ? 'text-success' : 'text-error'}}">Images: {{media.length}} / {{config.neededTiles()}}</p>
 	</div>	
 
 	<hr />
