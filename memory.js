@@ -397,7 +397,7 @@ memoryApp.controller('MemoryController', function($scope, $location) {
   $scope.game.play = function() {
     $scope.game.selectedCell = null;
     $scope.game.otherSelectedCell = null;
-    $scope.game.remaining = $scope.conig.neededTiles();
+    $scope.game.remaining = $scope.config.neededTiles();
     
     // 1) Choose n elements
 
