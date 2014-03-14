@@ -35,7 +35,8 @@ General:
  * offline mode;
  * apps (Mozilla OpenWebApp, Chrome app, Mobile apps) ;
  * integration with webActivity (Firefox/Android) ;
- * create reusable libraries.
+ * create reusable libraries;
+ * polyfill [Media Fragments](http://www.w3.org/TR/media-frags/) (possible ?)
 
 Memory:
 
