@@ -1,8 +1,7 @@
 wtoys
 =====
 
-A collection of (one!) web based games based around the concept of
-remixing the web.
+A collection of (one!) web based games.
 
 See the [demo](http://wtoys.gabriel.netlib.re/).
 
